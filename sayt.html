@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G'afur G'ulom - Hayoti va Ijodi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Asosiy sahifa foni to'q ko'k */
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .literary-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Shisha effekti (Glassmorphism) */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Skroll animatsiyalari uchun klasslar */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Yozuv yozilish effekti uchun kursor */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #fbbf24;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* --- FAKAT HERO BO'LIMI UCHUN FON RASMI SOZLAMALARI --- */
+        .header-bg-image {
+            position: absolute;
+            inset: 0; /* Yuqori, pastki, chap, o'ng nol */
+            width: 100%;
+            height: 100%;
+            /* SHU YERGA G'AFUR G'ULOMNING ASOSIY ORQA FON RASMINI QO'YING */
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwbw48_tX5Le-Wu0bi8raTwxKrpACtFbjsBw&s'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px) brightness(0.3); /* Xiralik va qoraytirish effekti yozuvlar aniq ko'rinishi uchun */
+            z-index: -1; /* Matnlarning orqasiga o'tkazish */
+            transform: scale(1.05); /* Chetlaridagi xiralikni yopish uchun */
+        }
+        /* Parallax effekti ushbu div transformiga ta'sir qiladi */
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-500 selection:text-slate-900">
+
+    <nav class="fixed w-full top-0 z-50 glass-panel border-b-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer text-2xl font-bold literary-font tracking-wider text-amber-400">
+                    G'afur G'ulom
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#hayoti" class="hover:text-amber-400 transition duration-300 px-3 py-2 rounded-md text-sm uppercase tracking-widest font-semibold">Hayoti</a>
+                        <a href="#asarlari" class="hover:text-amber-400 transition duration-300 px-3 py-2 rounded-md text-sm uppercase tracking-widest font-semibold">Asarlari</a>
+                        <a href="#muzey" class="hover:text-amber-400 transition duration-300 px-3 py-2 rounded-md text-sm uppercase tracking-widest font-semibold">Uy Muzeyi</a>
+                        <a href="#maqolalar" class="hover:text-amber-400 transition duration-300 px-3 py-2 rounded-md text-sm uppercase tracking-widest font-semibold">Maqolalar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+        <div class="header-bg-image"></div>
+        
+        <div class="max-w-4xl mx-auto z-10 reveal">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 text-white drop-shadow-2xl tracking-tight">
+                G'AFUR <span class="text-amber-500">G'ULOM</span>
+            </h1>
+            <div class="h-1 w-32 bg-amber-500 mx-auto mb-8 rounded-full opacity-70"></div>
+            <p class="text-xl md:text-3xl font-light text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed h-16">
+                <span id="typed-text" class="literary-font italic text-amber-100"></span><span class="cursor">&nbsp;</span>
+            </p>
+            <a href="#hayoti" class="inline-block mt-8 border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 transition-all duration-300 px-10 py-4 rounded-full text-lg tracking-widest uppercase font-semibold">
+                SAYOHATNI BOSHLASH
+            </a>
+        </div>
+    </header>
+
+    <section id="hayoti" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-amber-400 mb-4">Hayoti va Ijod Yo'li</h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">O'zbek adabiyotining yorqin yulduzi</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="glass-panel p-2 rounded-2xl reveal-left relative group">
+                <img src="https://cdn1.img.sputniknews.uz/img/07e7/04/11/34004852_0:0:2628:2048_1920x0_80_0_0_953c4e13a5d5b855aa191206434f2319.jpg" alt="G'afur G'ulom portreti" class="w-full h-auto object-cover rounded-xl shadow-2xl transition duration-500 group-hover:scale-[1.02]">
+                <div class="absolute inset-0 border-2 border-amber-500/30 rounded-2xl transform translate-x-4 translate-y-4 -z-10 transition duration-500 group-hover:translate-x-6 group-hover:translate-y-6"></div>
+            </div>
+            <div class="reveal-right space-y-6 text-lg text-gray-300 leading-relaxed text-justify">
+                <p>
+                    <span class="text-5xl font-bold literary-font text-amber-500 float-left mr-3 mt-1 leading-none">G'</span>afur G'ulom (1903-1966) – o'zbek xalqining ardoqli shoiri, yozuvchisi, publitsisti va tarjimoni. U O'zbekiston Fanlar akademiyasining haqiqiy a'zosi bo'lib, zamonaviy o'zbek adabiyotining asoschilaridan biri hisoblanadi.
+                </p>
+                <p>
+                    Toshkent shahrida tug'ilgan adib yoshligidanoq ota-onasidan yetim qolib, mashaqqatli hayot yo'lini bosib o'tdi. Aynan shu qiyinchiliklar uning ijodida chuqur insonparvarlik, yetimlar va dardi bor insonlarga nisbatan cheksiz mehr tuyg'ularini shakllantirdi.
+                </p>
+                <p>
+                    Uning ijodida Ikkinchi jahon urushi yillarida yozilgan asarlar alohida o'rin tutadi. Xususan, "Sen yetim emassan" she'ri o'zbek xalqining bag'rikengligi va ulug'vorligini butun dunyoga tarannum etgan durdona asardir.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="asarlari" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+        
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-amber-400 mb-4">Hamma Asarlari</h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">Nasr, nazm va tarjimalar</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-panel rounded-2xl overflow-hidden reveal hover:-translate-y-3 transition-all duration-500 group">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://i.ytimg.com/vi/afCFvAnCdmA/maxresdefault.jpg" alt="Shum bola" class="w-full h-full object-cover group-hover:scale-110 transition duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                        <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Qissa</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-white mb-3">Shum bola</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        O'zbek adabiyotining eng durdona qissalaridan biri. Asarda o'tgan asr boshlaridagi Toshkent hayoti va sodda, lekin sho'x bolaning sarguzashtlari o'ziga xos mutoyiba bilan yoritilgan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl overflow-hidden reveal hover:-translate-y-3 transition-all duration-500 group" style="transition-delay: 100ms;">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://i.ytimg.com/vi/IeUOXFWKiPU/maxresdefault.jpg" alt="Yodgor" class="w-full h-full object-cover group-hover:scale-110 transition duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Qissa</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-white mb-3">Yodgor</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Yangi jamiyat qurilishi, insonlar o'rtasidagi munosabatlar, mehnat va hayotning mazmuni haqida chuqur falsafiy mushohadalarga boy qissa.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl overflow-hidden reveal hover:-translate-y-3 transition-all duration-500 group" style="transition-delay: 200ms;">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://i.ytimg.com/vi/3D4RueHZxPQ/sddefault.jpg?v=6634c175" alt="She'rlar to'plami" class="w-full h-full object-cover group-hover:scale-110 transition duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                        <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Nazm</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-white mb-3">Sen yetim emassan</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Urush yillaridagi o'zbek xalqining bag'rikengligi, mehr-oqibati eng yuqori notalarda kuylangan betakror she'riy asar.
+                    </p>
+                </div>
+            </div>
+            
+             </div>
+        
+        <div class="mt-12 text-center reveal">
+            <button class="glass-panel px-8 py-3 rounded-full text-amber-400 hover:bg-amber-400 hover:text-slate-900 transition font-semibold tracking-wider uppercase text-sm flex items-center justify-center mx-auto gap-2">
+                Barcha asarlarini ko'rish <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+            </button>
+        </div>
+    </section>
+
+    <section id="muzey" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+        
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-amber-400 mb-4">Uy Muzeyi</h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">Adib xotirasiga sadoqat</p>
+        </div>
+
+        <div class="glass-panel p-8 md:p-12 rounded-3xl reveal flex flex-col lg:flex-row gap-12">
+            <div class="w-full lg:w-1/2 space-y-6 flex flex-col justify-center">
+                <h3 class="text-3xl font-bold text-white literary-font">Tarix nafas olayotgan dargoh</h3>
+                <div class="w-20 h-1 bg-amber-500 rounded"></div>
+                <p class="text-gray-300 leading-relaxed text-justify">
+                    G'afur G'ulom uy-muzeyi Toshkent shahrining Arnasoy ko'chasida, adib 1944-yildan umrining oxirigacha yashab ijod qilgan xonadonda joylashgan. Muzeyda yozuvchining shaxsiy buyumlari, noyob qo'lyozmalari, boy kutubxonasi va ijod jarayoniga guvoh bo'lgan ish stoli aslicha saqlanib qolgan.
+                </p>
+                <p class="text-gray-300 leading-relaxed text-justify">
+                    Har bir xona o'tgan asr muhitini o'zida mujassam etgan bo'lib, ziyoratchilarga ulug' adibning kundalik hayoti va ijodiy olamiga to'g'ridan-to'g'ri sayohat qilish imkonini beradi.
+                </p>
+                <ul class="text-amber-300 space-y-3 mt-4">
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Nodir kitoblar to'plami</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Original qo'lyozmalar va maktublar</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Shaxsiy buyumlar va fotogalereya</li>
+                </ul>
+            </div>
+            
+            <div class="w-full lg:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.openai.com/static-rsc-4/kX7iMA0nUx14k2n7BheRzA8WnTe_sIhzQbQKTk2nc8rMF4kkr3sYgUKTS84Wjp_Wn7GcXCML6tFVT0VNsDh40vC5b0xyjzomrUEaZ7pWb0xY8Xy5ITt5IWw92gl_KAWcvo1lj4jzdi3mVzGbSgy9II04xrOmsTR8CszcKQnaW2M?purpose=inline" alt="Muzey ko'rinishi 1" class="rounded-2xl w-full h-48 object-cover hover:scale-105 transition duration-300">
+                <img src="https://images.openai.com/static-rsc-4/FlsIGGQVg4SPnaxKn3EJDoTsGGiIsLvQ41NJMAhj4FgeWvAwMABeQkI7hfGxg37xzi5iTYHBw3qIH8vBoR8I3pw36WxR7ggZoAPO6cHcchzOjUkAPSxm5k5BY7HVMOlWXO_dMXYqeWjlHR-RW7Q-YdyBrSwJrBjvTObKhK9SYeA?purpose=inline" alt="Muzey ko'rinishi 2" class="rounded-2xl w-full h-48 object-cover mt-8 hover:scale-105 transition duration-300">
+                <img src="https://images.openai.com/static-rsc-4/VLGGyRf4WVm7I3k6_8R-4FHQxRmNelkItbOvCsvx8_qTSkO73ZbAu0rRucyUWBQDOzEllth0eZdKhh5mcslrm1zaZzV72N2mUvHRboS7UnFjBsI8Qn5i3Pb8dyozuJ3-YEwbjgsMhsnHWOOETzc8xq0t8jU9kjS0E_HUK0rQwi9Tc7Ip2R4W0cQIca_2JLqn?purpose=fullsize" alt="Muzey ko'rinishi 3" class="rounded-2xl w-full h-48 object-cover -mt-8 hover:scale-105 transition duration-300">
+                <img src="https://images.openai.com/static-rsc-4/lJ-IwP7KKqVtP3vDLRmJrrDRIjCvZF5mlOISbscFw6cwW0fb59NiVserH3-VX79AU0ng9Kieb39Et10awxkObffU4QLZzEwuchWYoXKRuKUTI9eW50nKsDlwNoVulfkQq0oE6szYLPoGqV9Lq4ZuPZli51W3iuTYQY9OFOscbNPQkPUgKvhsySuuhO3v7uz2?purpose=fullsize" alt="Muzey ko'rinishi 4" class="rounded-2xl w-full h-48 object-cover hover:scale-105 transition duration-300">
+            </div>
+        </div>
+    </section>
+
+    <section id="maqolalar" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+        
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-amber-400 mb-4">Maqolalar va Xotiralar</h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">Zamindoshlari va tadqiqotchilar nigohida</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass-panel p-8 rounded-2xl reveal-left group hover:bg-white/5 transition duration-300 border-l-4 border-l-amber-500">
+                <span class="text-sm text-amber-500 font-semibold uppercase tracking-wider mb-2 block">Ilmiy maqola</span>
+                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-amber-400 transition">G'afur G'ulom she'riyatida inson fojiasi va matonati</h3>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Adabiyotshunoslar tomonidan shoirning urush yillaridagi ijodi tahlil qilingan chuqur ilmiy ish. Unda "Vaqt" va "Sen yetim emassan" she'rlarining falsafiy mohiyati ochib berilgan.
+                </p>
+                <a href="#" class="text-amber-400 font-semibold hover:text-white transition flex items-center gap-2">O'qish <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></a>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl reveal-right group hover:bg-white/5 transition duration-300 border-l-4 border-l-blue-500">
+                <span class="text-sm text-blue-400 font-semibold uppercase tracking-wider mb-2 block">Xotira</span>
+                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition">Buyuk ustozi haqida shogird xotiralari</h3>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Zamonaviy o'zbek adiblarining G'afur G'ulom haqidagi iliq xotiralari, uning hayotdagi kamtarinligi va yosh ijodkorlarga ko'rsatgan g'amxo'rliklari haqida esselar to'plami.
+                </p>
+                <a href="#" class="text-blue-400 font-semibold hover:text-white transition flex items-center gap-2">O'qish <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass-panel mt-20 border-t border-white/10 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-2xl font-bold literary-font tracking-wider text-amber-400">
+                    G'afur.G'ulom
+                </div>
+                <p class="text-gray-400 text-sm text-center">
+                    &copy; 2026 G'afur G'ulom hayoti va ijodiga bag'ishlangan maxsus sahifa. Barcha huquqlar himoyalangan.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#hayoti" class="text-gray-400 hover:text-amber-500 transition">Hayoti</a>
+                    <a href="#asarlari" class="text-gray-400 hover:text-amber-500 transition">Asarlari</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Matnni yozish effekti (Typewriter effect) Hero qismida
+        const texts = [
+            "O'zbek xalqining otashnafas shoiri",
+            "Siz yetim emassiz, xalqimiz siz bilan!",
+            "Adabiyotimizning zabardast ustuni"
+        ];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        let isDeleting = false;
+
+        function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+
+            if (isDeleting) {
+                letter = currentText.slice(0, --index);
+            } else {
+                letter = currentText.slice(0, ++index);
+            }
+
+            document.getElementById("typed-text").textContent = letter;
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && letter.length === currentText.length) {
+                typeSpeed = 2000; // So'z tugaganda kutish
+                isDeleting = true;
+            } else if (isDeleting && letter.length === 0) {
+                isDeleting = false;
+                count++;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        
+        // Sahifa yuklanganda yozishni boshlash
+        document.addEventListener('DOMContentLoaded', type);
+
+        // 2. Skroll qilinganda elementlarni paydo qilish (Scroll Reveal Animation)
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 100; // Ekranda qancha ko'ringanda paydo bo'lishi
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealElements);
+        // Boshlang'ich holatda ham tekshirish
+        revealElements();
+
+        // 3. Menyu havolalariga bosilganda tekis skroll (Smooth Scroll)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Navbar balandligini hisobga olish
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 4. Parallax effekti (Sichqoncha qimirlaganda orqa fon biroz qimirlashi)
+        // --- BU QISM YANGI FON DIVIGA MOSLAB O'ZGARTIRILDI ---
+        document.addEventListener("mousemove", (e) => {
+            // Yangi fon divini topish
+            const bg = document.querySelector('.header-bg-image');
+            // Agar sahifaning boshida (Hero qismida) bo'lsa, parallax ishlashi
+            if (bg) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;  
+                // Transformatsiyani faqat shu divga qo'llash
+                bg.style.transform = `scale(1.05) translate(-${x * 10}px, -${y * 10}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
